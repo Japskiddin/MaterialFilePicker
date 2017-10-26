@@ -5,7 +5,7 @@ android {
   buildToolsVersion "26.0.2"
 
   defaultConfig {
-    applicationId "com.dimorinny.sample"
+    applicationId "io.github.japskiddin.materialfilepicker"
     minSdkVersion 14
     targetSdkVersion 26
     versionCode 1
@@ -21,9 +21,6 @@ android {
 
 repositories {
   maven {
-    url "http://dl.bintray.com/lukaville/maven"
-  }
-  maven {
     url 'https://maven.google.com/'
     name 'Google'
   }
@@ -32,5 +29,5 @@ repositories {
 dependencies {
   compile fileTree(include: ['*.jar'], dir: 'libs')
   testCompile 'junit:junit:4.12'
-  compile project(':library')
+  compile project(':materialfilepicker')
 }
