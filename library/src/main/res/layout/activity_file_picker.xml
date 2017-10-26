@@ -1,30 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/id_appbar"
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/id_appbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fitsSystemWindows="true"
+      >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="?mfp_toolbar_theme"
-            />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="?mfp_toolbar_theme"
         />
+
+  </android.support.design.widget.AppBarLayout>
+
+  <com.nbsp.materialfilepicker.widget.EmptyRecyclerView
+      android:id="@+id/directory_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scrollbars="vertical"
+      android:visibility="visible"
+      />
+
+  <RelativeLayout
+      android:id="@+id/directory_empty_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
+      >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="110dp"
+          android:layout_height="110dp"
+          android:layout_gravity="center"
+          android:src="@drawable/ic_file_gray_116dp"
+          />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:fontFamily="sans-serif-medium"
+          android:text="@string/empty_directory_hint"
+          android:textColor="@color/empty_directory_hint"
+          android:textSize="24sp"
+          />
+    </LinearLayout>
+  </RelativeLayout>
 
 </LinearLayout>

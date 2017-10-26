@@ -4,20 +4,20 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'library'
 
-    publishedGroupId = 'com.nbsp'
+    publishedGroupId = 'io.github.japskiddin'
     libraryName = 'Material File Picker'
-    artifact = 'library'
+    artifact = 'materialfilepicker'
 
-    libraryDescription = 'File picker library in material design'
+    libraryDescription = 'Library for selecting folders'
 
-    siteUrl = 'https://github.com/nbsp-team/MaterialFilePicker'
-    gitUrl = 'https://github.com/nbsp-team/MaterialFilePicker'
+    siteUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
+    gitUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
 
-    libraryVersion = '1.8'
+    libraryVersion = '1.0.0'
 
-    developerId = 'lukaville'
-    developerName = 'Nickolay Chameev'
-    developerEmail = 'lukaville@gmail.com'
+    developerId = 'japskiddin'
+    developerName = 'Nikita Bezhentsev'
+    developerEmail = 'japskiddin@gmail.com'
 
     licenseName = 'GNU GENERAL PUBLIC LICENSE Version 2'
     licenseUrl = 'https://raw.githubusercontent.com/nbsp-team/MaterialFilePicker/master/LICENSE'
@@ -25,12 +25,12 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 13
         versionName "1.3"
     }
@@ -48,9 +48,9 @@ dependencies {
 
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

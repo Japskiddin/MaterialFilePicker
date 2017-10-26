@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_close"
-        android:title="@string/action_close"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_close_white_24dp" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/action_add_dir"
+      android:icon="@drawable/ic_add_box_black_24dp"
+      android:title="@string/menu_add_folder"
+      app:showAsAction="ifRoom"/>
+  <item
+      android:id="@+id/action_select"
+      android:icon="@drawable/ic_check_circle_black_24dp"
+      android:title="@string/menu_select"
+      app:showAsAction="ifRoom"/>
 </menu>
