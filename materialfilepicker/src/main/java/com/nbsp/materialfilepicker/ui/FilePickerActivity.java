@@ -43,6 +43,7 @@ public class FilePickerActivity extends AppCompatActivity {
   public static final String ARG_FILTER = "arg_filter";
   public static final String ARG_CLOSEABLE = "arg_closeable";
   public static final String ARG_TITLE = "arg_title";
+  public static final String ARG_FILE_PICK = "arg_file_pick";
 
   public static final String STATE_START_PATH = "state_start_path";
   private static final String STATE_CURRENT_PATH = "state_current_path";
@@ -58,7 +59,7 @@ public class FilePickerActivity extends AppCompatActivity {
   private String mCurrentPath = mStartPath;
   private CharSequence mTitle;
 
-  private Boolean mCloseable;
+  private boolean mCloseable, isFilePick;
 
   private CompositeFilter mFilter;
 
@@ -160,6 +161,10 @@ public class FilePickerActivity extends AppCompatActivity {
 
     if (getIntent().hasExtra(ARG_CLOSEABLE)) {
       mCloseable = getIntent().getBooleanExtra(ARG_CLOSEABLE, true);
+    }
+
+    if (getIntent().hasExtra(ARG_FILE_PICK)) {
+      isFilePick = getIntent().getBooleanExtra(ARG_FILE_PICK, false);
     }
   }
 
@@ -292,6 +297,11 @@ public class FilePickerActivity extends AppCompatActivity {
 
       updateTitle();
       initFilesList();
+    }
+
+    if (isFilePick && clickedFile.isFile()) {
+      mCurrentPath = clickedFile.getPath();
+      setResultAndFinish(mCurrentPath);
     }
   }
 

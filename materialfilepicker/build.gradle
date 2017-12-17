@@ -14,7 +14,7 @@ ext {
   siteUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
   gitUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
 
-  libraryVersion = '1.0.1'
+  libraryVersion = '1.0.2'
 
   developerId = 'nkita'
   developerName = 'Nikita Bezhentsev'
@@ -36,8 +36,8 @@ android {
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 27
-    versionCode 14
-    versionName "1.4"
+    versionCode 15
+    versionName "1.5"
   }
   buildTypes {
     release {
