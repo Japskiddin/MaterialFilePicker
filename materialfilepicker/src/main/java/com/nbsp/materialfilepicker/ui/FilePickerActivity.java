@@ -2,10 +2,13 @@ package com.nbsp.materialfilepicker.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +31,6 @@ import java.io.FileFilter;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.regex.Pattern;
 
 /**
@@ -85,6 +87,29 @@ public class FilePickerActivity extends AppCompatActivity {
     }
 
     return super.onOptionsItemSelected(menuItem);
+  }
+
+  @Override public boolean onPrepareOptionsMenu(Menu menu) {
+    MenuItem select = menu.findItem(R.id.action_select);
+    MenuItem add = menu.findItem(R.id.action_add_dir);
+    Drawable selectIcon, addIcon;
+    selectIcon = select.getIcon();
+    if (selectIcon != null) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        selectIcon.setTint(Color.WHITE);
+      } else {
+        DrawableCompat.setTint(DrawableCompat.wrap(selectIcon), Color.WHITE);
+      }
+    }
+    addIcon = add.getIcon();
+    if (addIcon != null) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        addIcon.setTint(Color.WHITE);
+      } else {
+        DrawableCompat.setTint(DrawableCompat.wrap(addIcon), Color.WHITE);
+      }
+    }
+    return super.onPrepareOptionsMenu(menu);
   }
 
   @Override public void onBackPressed() {
