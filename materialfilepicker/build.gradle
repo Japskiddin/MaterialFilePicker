@@ -14,7 +14,7 @@ ext {
   siteUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
   gitUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
 
-  libraryVersion = '1.0.0'
+  libraryVersion = '1.0.1'
 
   developerId = 'nkita'
   developerName = 'Nikita Bezhentsev'
