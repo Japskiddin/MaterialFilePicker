@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         .withHiddenFiles(true)
         .withTitle("Sample title")
         .withFilePick(true)
+        .withAddDirs(false)
         .start();
   }
 

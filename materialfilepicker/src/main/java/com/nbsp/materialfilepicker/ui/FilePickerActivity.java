@@ -44,6 +44,7 @@ public class FilePickerActivity extends AppCompatActivity {
   public static final String ARG_CLOSEABLE = "arg_closeable";
   public static final String ARG_TITLE = "arg_title";
   public static final String ARG_FILE_PICK = "arg_file_pick";
+  public static final String ARG_ADD_DIRS = "arg_add_dirs";
 
   public static final String STATE_START_PATH = "state_start_path";
   private static final String STATE_CURRENT_PATH = "state_current_path";
@@ -59,7 +60,7 @@ public class FilePickerActivity extends AppCompatActivity {
   private String mCurrentPath = mStartPath;
   private CharSequence mTitle;
 
-  private boolean mCloseable, isFilePick;
+  private boolean mCloseable, isFilePick, addDirs;
 
   private CompositeFilter mFilter;
 
@@ -109,6 +110,9 @@ public class FilePickerActivity extends AppCompatActivity {
       } else {
         DrawableCompat.setTint(DrawableCompat.wrap(addIcon), Color.WHITE);
       }
+    }
+    if (!addDirs) {
+      add.setVisible(false);
     }
     return super.onPrepareOptionsMenu(menu);
   }
@@ -166,6 +170,10 @@ public class FilePickerActivity extends AppCompatActivity {
     if (getIntent().hasExtra(ARG_FILE_PICK)) {
       isFilePick = getIntent().getBooleanExtra(ARG_FILE_PICK, false);
     }
+
+    if (getIntent().hasExtra(ARG_ADD_DIRS)) {
+      addDirs = getIntent().getBooleanExtra(ARG_ADD_DIRS, true);
+    }
   }
 
   private void initToolbar() {
@@ -198,8 +206,8 @@ public class FilePickerActivity extends AppCompatActivity {
   }
 
   private void initViews() {
-    mToolbar = (Toolbar) findViewById(R.id.toolbar);
-    mDirectoryRecyclerView = (EmptyRecyclerView) findViewById(R.id.directory_recycler_view);
+    mToolbar = findViewById(R.id.toolbar);
+    mDirectoryRecyclerView = findViewById(R.id.directory_recycler_view);
     mEmptyView = findViewById(R.id.directory_empty_view);
   }
 

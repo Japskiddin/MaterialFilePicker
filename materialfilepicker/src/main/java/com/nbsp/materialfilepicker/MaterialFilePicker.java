@@ -29,7 +29,7 @@ public class MaterialFilePicker {
   private Boolean mShowHidden = false;
   private Boolean mCloseable = true;
   private CharSequence mTitle;
-  private boolean isFilePick = false;
+  private boolean isFilePick = false, addDirs = true;
 
   public MaterialFilePicker() {
   }
@@ -86,6 +86,11 @@ public class MaterialFilePicker {
 
   public MaterialFilePicker withFilePick(boolean filePick) {
     isFilePick = filePick;
+    return this;
+  }
+
+  public MaterialFilePicker withAddDirs(boolean addDirs) {
+    this.addDirs = addDirs;
     return this;
   }
 
@@ -203,9 +208,8 @@ public class MaterialFilePicker {
       intent.putExtra(FilePickerActivity.ARG_TITLE, mTitle);
     }
 
-    if (isFilePick) {
-      intent.putExtra(FilePickerActivity.ARG_FILE_PICK, isFilePick);
-    }
+    intent.putExtra(FilePickerActivity.ARG_FILE_PICK, isFilePick);
+    intent.putExtra(FilePickerActivity.ARG_ADD_DIRS, addDirs);
 
     return intent;
   }
