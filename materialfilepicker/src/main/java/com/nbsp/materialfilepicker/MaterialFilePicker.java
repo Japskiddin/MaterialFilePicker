@@ -29,7 +29,7 @@ public class MaterialFilePicker {
   private Boolean mShowHidden = false;
   private Boolean mCloseable = true;
   private CharSequence mTitle;
-  private boolean isFilePick = false, addDirs = true;
+  private boolean isFilePick = false, addDirs = false;
 
   public MaterialFilePicker() {
   }

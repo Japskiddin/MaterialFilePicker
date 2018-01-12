@@ -260,7 +260,7 @@ public class FilePickerActivity extends AppCompatActivity {
     final LayoutInflater layoutInflater = this.getLayoutInflater();
     LinearLayout linearLayout =
         (LinearLayout) layoutInflater.inflate(R.layout.dialog_new_dir, null);
-    final EditText dirName = (EditText) linearLayout.findViewById(R.id.et_dirName);
+    final EditText dirName = linearLayout.findViewById(R.id.et_dirName);
     AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
     alertDialog.setView(linearLayout);
     alertDialog.setTitle(R.string.dialog_title);

@@ -9,8 +9,7 @@ import java.io.Serializable;
  */
 public class HiddenFilter implements FileFilter, Serializable {
 
-    @Override
-    public boolean accept(File f) {
-        return !f.isHidden();
-    }
+  @Override public boolean accept(File f) {
+    return !f.isHidden();
+  }
 }

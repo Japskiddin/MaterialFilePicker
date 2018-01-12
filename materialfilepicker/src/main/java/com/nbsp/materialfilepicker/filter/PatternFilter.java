@@ -10,16 +10,15 @@ import java.util.regex.Pattern;
  */
 public class PatternFilter implements FileFilter, Serializable {
 
-    private Pattern mPattern;
-    private boolean mDirectoriesFilter;
+  private Pattern mPattern;
+  private boolean mDirectoriesFilter;
 
-    public PatternFilter(Pattern pattern, boolean directoriesFilter) {
-        mPattern = pattern;
-        mDirectoriesFilter = directoriesFilter;
-    }
+  public PatternFilter(Pattern pattern, boolean directoriesFilter) {
+    mPattern = pattern;
+    mDirectoriesFilter = directoriesFilter;
+  }
 
-    @Override
-    public boolean accept(File f) {
-        return f.isDirectory() && !mDirectoriesFilter || mPattern.matcher(f.getName()).matches();
-    }
+  @Override public boolean accept(File f) {
+    return f.isDirectory() && !mDirectoriesFilter || mPattern.matcher(f.getName()).matches();
+  }
 }

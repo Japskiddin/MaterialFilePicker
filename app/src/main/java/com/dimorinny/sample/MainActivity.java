@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    Button pickButton = (Button) findViewById(R.id.pick_from_activity);
+    Button pickButton = findViewById(R.id.pick_from_activity);
     pickButton.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         checkPermissionsAndOpenFilePicker();
