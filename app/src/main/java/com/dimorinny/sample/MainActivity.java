@@ -69,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
         .withRequestCode(FILE_PICKER_REQUEST_CODE)
         .withHiddenFiles(true)
         .withTitle("Sample title")
-        .withFilePick(true)
-        .withAddDirs(false)
+        .withFilePick(false)
         .start();
   }
 

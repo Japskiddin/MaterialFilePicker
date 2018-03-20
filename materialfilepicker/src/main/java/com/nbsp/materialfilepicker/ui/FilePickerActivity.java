@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.nbsp.materialfilepicker.R;
 import com.nbsp.materialfilepicker.filter.CompositeFilter;
@@ -84,8 +87,6 @@ public class FilePickerActivity extends AppCompatActivity {
       setResultAndFinish(mCurrentPath);
     } else if (menuItem.getItemId() == R.id.action_add_dir) {
       showNewFolderDialog();
-    } else if (menuItem.getItemId() == android.R.id.home) {
-      backClick();
     }
 
     return super.onOptionsItemSelected(menuItem);
@@ -113,6 +114,9 @@ public class FilePickerActivity extends AppCompatActivity {
     }
     if (!addDirs) {
       add.setVisible(false);
+    }
+    if (isFilePick) {
+      select.setVisible(false);
     }
     return super.onPrepareOptionsMenu(menu);
   }
@@ -179,11 +183,6 @@ public class FilePickerActivity extends AppCompatActivity {
   private void initToolbar() {
     setSupportActionBar(mToolbar);
 
-    // Show back button
-    if (getSupportActionBar() != null) {
-      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
     // Truncate start of path
     try {
       Field f;
@@ -209,6 +208,15 @@ public class FilePickerActivity extends AppCompatActivity {
     mToolbar = findViewById(R.id.toolbar);
     mDirectoryRecyclerView = findViewById(R.id.directory_recycler_view);
     mEmptyView = findViewById(R.id.directory_empty_view);
+    RelativeLayout btn_up = findViewById(R.id.btn_back);
+    ImageView iv_up = findViewById(R.id.iv_up);
+    Drawable drawable = VectorDrawableCompat.create(getResources(), R.drawable.ic_up, getTheme());
+    iv_up.setImageDrawable(drawable);
+    btn_up.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        backClick();
+      }
+    });
   }
 
   private void updateTitle() {
