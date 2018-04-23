@@ -14,7 +14,7 @@ ext {
   siteUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
   gitUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
 
-  libraryVersion = '1.1.0'
+  libraryVersion = '1.1.1'
 
   developerId = 'nkita'
   developerName = 'Nikita Bezhentsev'
@@ -35,8 +35,8 @@ android {
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 27
-    versionCode 23
-    versionName "1.1.0"
+    versionCode 24
+    versionName "1.1.1"
     vectorDrawables.useSupportLibrary = true
   }
   buildTypes {
