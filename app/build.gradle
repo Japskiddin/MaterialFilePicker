@@ -26,5 +26,5 @@ repositories {
 }
 
 dependencies {
-  compile project(':materialfilepicker')
+  implementation project(':materialfilepicker')
 }
