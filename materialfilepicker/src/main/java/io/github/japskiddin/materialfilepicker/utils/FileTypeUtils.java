@@ -1,11 +1,8 @@
-package com.nbsp.materialfilepicker.utils;
+package io.github.japskiddin.materialfilepicker.utils;
 
-import com.nbsp.materialfilepicker.R;
 import java.io.File;
 
-/**
- * Created by nickolay on 25.10.15.
- */
+import io.github.japskiddin.materialfilepicker.R;
 
 public class FileTypeUtils {
   public enum FileType {

@@ -1,13 +1,10 @@
-package com.nbsp.materialfilepicker.filter;
+package io.github.japskiddin.materialfilepicker.filter;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
-/**
- * Created by Dimorinny on 31.05.16.
- */
 public class PatternFilter implements FileFilter, Serializable {
 
   private Pattern mPattern;

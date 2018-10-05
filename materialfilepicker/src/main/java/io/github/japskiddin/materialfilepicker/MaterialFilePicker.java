@@ -1,15 +1,17 @@
-package com.nbsp.materialfilepicker;
+package io.github.japskiddin.materialfilepicker;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
-import com.nbsp.materialfilepicker.filter.CompositeFilter;
-import com.nbsp.materialfilepicker.filter.HiddenFilter;
-import com.nbsp.materialfilepicker.filter.PatternFilter;
-import com.nbsp.materialfilepicker.ui.FilePickerActivity;
+
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import androidx.fragment.app.Fragment;
+import io.github.japskiddin.materialfilepicker.filter.CompositeFilter;
+import io.github.japskiddin.materialfilepicker.filter.HiddenFilter;
+import io.github.japskiddin.materialfilepicker.filter.PatternFilter;
+import io.github.japskiddin.materialfilepicker.ui.FilePickerActivity;
 
 /**
  * Material File Picker builder
@@ -17,7 +19,7 @@ import java.util.regex.Pattern;
 public class MaterialFilePicker {
   private Activity mActivity;
   private Fragment mFragment;
-  private android.support.v4.app.Fragment mSupportFragment;
+  private Fragment mSupportFragment;
 
   private Class<? extends FilePickerActivity> mFilePickerClass = FilePickerActivity.class;
 
@@ -64,7 +66,7 @@ public class MaterialFilePicker {
    * Specifies support fragment which will be used to
    * start file picker
    */
-  public MaterialFilePicker withSupportFragment(android.support.v4.app.Fragment fragment) {
+  public MaterialFilePicker withSupportFragment(Fragment fragment) {
     if (mActivity != null || mFragment != null) {
       throw new RuntimeException("You must pass either Activity, Fragment or SupportFragment");
     }
@@ -220,7 +222,7 @@ public class MaterialFilePicker {
    *
    * @see MaterialFilePicker#withActivity(Activity)
    * @see MaterialFilePicker#withFragment(Fragment)
-   * @see MaterialFilePicker#withSupportFragment(android.support.v4.app.Fragment)
+   * @see MaterialFilePicker#withSupportFragment(Fragment)
    */
   public void start() {
     if (mActivity == null && mFragment == null && mSupportFragment == null) {

@@ -1,11 +1,8 @@
-package com.nbsp.materialfilepicker.utils;
+package io.github.japskiddin.materialfilepicker.utils;
 
 import java.io.File;
 import java.util.Comparator;
 
-/**
- * Created by Dimorinny on 24.10.15.
- */
 public class FileComparator implements Comparator<File> {
   @Override public int compare(File f1, File f2) {
     if (f1 == f2) {

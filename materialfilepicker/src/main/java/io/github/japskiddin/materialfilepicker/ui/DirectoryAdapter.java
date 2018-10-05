@@ -1,22 +1,21 @@
-package com.nbsp.materialfilepicker.ui;
+package io.github.japskiddin.materialfilepicker.ui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.nbsp.materialfilepicker.R;
-import com.nbsp.materialfilepicker.utils.FileTypeUtils;
+
 import java.io.File;
 import java.util.List;
 
-/**
- * Created by Dimorinny on 24.10.15.
- */
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import io.github.japskiddin.materialfilepicker.R;
+import io.github.japskiddin.materialfilepicker.utils.FileTypeUtils;
 
 public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.DirectoryViewHolder> {
   public interface OnItemClickListener {
@@ -56,13 +55,14 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
     mOnItemClickListener = listener;
   }
 
-  @Override public DirectoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @NonNull
+  @Override public DirectoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_file, parent, false);
 
     return new DirectoryViewHolder(view, mOnItemClickListener);
   }
 
-  @Override public void onBindViewHolder(DirectoryViewHolder holder, int position) {
+  @Override public void onBindViewHolder(@NonNull DirectoryViewHolder holder, int position) {
     File currentFile = mFiles.get(position);
 
     FileTypeUtils.FileType fileType = FileTypeUtils.getFileType(currentFile);

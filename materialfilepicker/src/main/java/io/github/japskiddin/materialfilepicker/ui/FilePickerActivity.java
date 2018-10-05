@@ -1,4 +1,4 @@
-package com.nbsp.materialfilepicker.ui;
+package io.github.japskiddin.materialfilepicker.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,27 +8,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.nbsp.materialfilepicker.R;
-import com.nbsp.materialfilepicker.filter.CompositeFilter;
-import com.nbsp.materialfilepicker.filter.PatternFilter;
-import com.nbsp.materialfilepicker.utils.FileUtils;
-import com.nbsp.materialfilepicker.widget.EmptyRecyclerView;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.Serializable;
@@ -36,9 +27,18 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-/**
- * Created by Dimorinny on 24.10.15.
- */
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import io.github.japskiddin.materialfilepicker.R;
+import io.github.japskiddin.materialfilepicker.filter.CompositeFilter;
+import io.github.japskiddin.materialfilepicker.filter.PatternFilter;
+import io.github.japskiddin.materialfilepicker.utils.FileUtils;
+import io.github.japskiddin.materialfilepicker.widget.EmptyRecyclerView;
+
 public class FilePickerActivity extends AppCompatActivity {
   public static final String ARG_START_PATH = "arg_start_path";
   public static final String ARG_CURRENT_PATH = "arg_current_path";
@@ -267,7 +267,7 @@ public class FilePickerActivity extends AppCompatActivity {
   private void showNewFolderDialog() {
     final LayoutInflater layoutInflater = this.getLayoutInflater();
     LinearLayout linearLayout =
-        (LinearLayout) layoutInflater.inflate(R.layout.dialog_new_dir, null);
+        (LinearLayout) layoutInflater.inflate(R.layout.dialog_new_dir, (ViewGroup) findViewById(R.id.main_layout), false);
     final EditText dirName = linearLayout.findViewById(R.id.et_dirName);
     AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
     alertDialog.setView(linearLayout);
