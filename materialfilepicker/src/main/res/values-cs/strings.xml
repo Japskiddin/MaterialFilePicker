@@ -14,5 +14,13 @@
     <string name="type_pdf">PDF dokument</string>
     <string name="type_power_point">Prezentace</string>
     <string name="type_word">Dokument</string>
-    <string name="type_apk">APK</string>
+    <string name="menu_select">Vybrat</string>
+    <string name="menu_add_folder">Přidat složku</string>
+    <string name="folder_name">Název složky</string>
+    <string name="dialog_create">Vytvořit</string>
+    <string name="dialog_cancel">zrušení</string>
+    <string name="dialog_title">Zadejte název složky</string>
+    <string name="error_folder_name">Zadejte název složky</string>
+    <string name="error_folder_exists">Složka existuje</string>
+    <string name="error_folder_created">Složka nebyla vytvořena</string>
 </resources>

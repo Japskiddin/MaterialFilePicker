@@ -14,5 +14,13 @@
     <string name="type_pdf">PDF Dokument</string>
     <string name="type_power_point">Presentation</string>
     <string name="type_word">Dokument</string>
-    <string name="type_apk">APK</string>
+    <string name="menu_select">Wählen</string>
+    <string name="menu_add_folder">Ordner hinzufügen</string>
+    <string name="folder_name">Ordnernamen</string>
+    <string name="dialog_create">Erstellen</string>
+    <string name="dialog_cancel">Stornieren</string>
+    <string name="dialog_title">Geben Sie den Ordnernamen ein</string>
+    <string name="error_folder_name">Bitte geben Sie den Ordnernamen ein</string>
+    <string name="error_folder_exists">Ordner existiert</string>
+    <string name="error_folder_created">Ordner wurde nicht erstellt</string>
 </resources>

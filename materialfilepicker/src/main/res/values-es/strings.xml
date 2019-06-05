@@ -3,7 +3,6 @@
     <string name="type_certificate">Certificado</string>
     <string name="action_close">Cerrar</string>
     <string name="type_archive">Archivo</string>
-    <string name="type_apk">APK</string>
     <string name="empty_directory_hint">Carpeta vacía</string>
     <string name="type_directory">Carpeta</string>
     <string name="type_document">Archivo</string>
@@ -15,4 +14,13 @@
     <string name="type_power_point">Powerpoint</string>
     <string name="type_video">Vídeo</string>
     <string name="type_word">Documento Word</string>
+    <string name="menu_select">Seleccionar</string>
+    <string name="menu_add_folder">Agregar carpeta</string>
+    <string name="folder_name">Nombre de la carpeta</string>
+    <string name="dialog_create">Crear</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="dialog_title">Ingrese el nombre de la carpeta</string>
+    <string name="error_folder_name">Por favor ingrese el nombre de la carpeta</string>
+    <string name="error_folder_exists">Existe carpeta</string>
+    <string name="error_folder_created">Carpeta no fue creada</string>
 </resources>

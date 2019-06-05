@@ -14,4 +14,13 @@
     <string name="type_power_point">Презентация</string>
     <string name="type_word">Документ</string>
     <string name="type_archive">Архив</string>
+    <string name="menu_select">Выбрать</string>
+    <string name="menu_add_folder">Добавить папку</string>
+    <string name="folder_name">Имя папки</string>
+    <string name="dialog_create">Создать</string>
+    <string name="dialog_cancel">Отмена</string>
+    <string name="dialog_title">Введите имя папки</string>
+    <string name="error_folder_name">Пожалуйста, введите имя папки</string>
+    <string name="error_folder_exists">Папка уже существует</string>
+    <string name="error_folder_created">Не удалось создать папку</string>
 </resources>

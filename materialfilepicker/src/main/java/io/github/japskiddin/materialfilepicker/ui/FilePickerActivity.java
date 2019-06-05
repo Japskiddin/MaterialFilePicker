@@ -9,24 +9,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import java.io.File;
-import java.io.FileFilter;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-
+import android.view.*;
+import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -38,6 +22,13 @@ import io.github.japskiddin.materialfilepicker.filter.CompositeFilter;
 import io.github.japskiddin.materialfilepicker.filter.PatternFilter;
 import io.github.japskiddin.materialfilepicker.utils.FileUtils;
 import io.github.japskiddin.materialfilepicker.widget.EmptyRecyclerView;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class FilePickerActivity extends AppCompatActivity {
   public static final String ARG_START_PATH = "arg_start_path";
@@ -286,19 +277,20 @@ public class FilePickerActivity extends AppCompatActivity {
   }
 
   private void createNewFolder(String dirName) {
-    if (!dirName.equals("")) {
-      File dir;
-
-      if (Build.VERSION.SDK_INT
-          > Build.VERSION_CODES.N_MR1) { //TODO: разобраться, почему папка не создаётся
-        dir = new File(new File(FileUtils.cutLastSegmentOfPath(mCurrentPath),
-            FileUtils.getCurrentDir(mCurrentPath)), dirName);
+    if (!TextUtils.isEmpty(dirName)) {
+      File dir = new File(mCurrentPath, dirName);
+      if (!dir.exists()) {
+        boolean created = dir.mkdir();
+        if (created) {
+          initFilesList();
+        } else {
+          Toast.makeText(getApplicationContext(), getString(R.string.error_folder_created), Toast.LENGTH_LONG).show();
+        }
       } else {
-        dir = new File(mCurrentPath + "/" + dirName);
+        Toast.makeText(getApplicationContext(), getString(R.string.error_folder_exists), Toast.LENGTH_LONG).show();
       }
-
-      dir.mkdirs();
-      initFilesList();
+    } else {
+      Toast.makeText(getApplicationContext(), getString(R.string.error_folder_name), Toast.LENGTH_LONG).show();
     }
   }
 

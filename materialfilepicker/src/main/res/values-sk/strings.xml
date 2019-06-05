@@ -14,5 +14,13 @@
     <string name="type_pdf">PDF dokument</string>
     <string name="type_power_point">Prezentácia</string>
     <string name="type_word">Dokument</string>
-    <string name="type_apk">APK</string>
+    <string name="menu_select">vybrať</string>
+    <string name="menu_add_folder">Pridať priečinok</string>
+    <string name="folder_name">Názov priečinka</string>
+    <string name="dialog_create">vytvoriť</string>
+    <string name="dialog_cancel">Zrušiť</string>
+    <string name="dialog_title">Zadajte názov priečinka</string>
+    <string name="error_folder_name">Zadajte názov priečinka</string>
+    <string name="error_folder_exists">Priečinok existuje</string>
+    <string name="error_folder_created">Priečinok nebol vytvorený</string>
 </resources>

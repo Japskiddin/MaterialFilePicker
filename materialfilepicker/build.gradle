@@ -14,7 +14,7 @@ ext {
   siteUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
   gitUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
 
-  libraryVersion = '1.1.2'
+  libraryVersion = '1.1.3'
 
   developerId = 'nkita'
   developerName = 'Nikita Bezhentsev'
@@ -35,8 +35,8 @@ android {
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 28
-    versionCode 25
-    versionName "1.1.2"
+    versionCode 26
+    versionName "1.1.3"
     vectorDrawables.useSupportLibrary = true
   }
   buildTypes {
@@ -62,6 +62,22 @@ bintray {
     vcsUrl = 'https://github.com/Japskiddin/MaterialFilePicker.git'
     publish = true
   }
+}
+
+configurations {
+  compile.exclude group: 'androidx.viewpager', module: 'viewpager'
+  compile.exclude group: 'androidx.slidingpanelayout', module: 'slidingpanelayout'
+  compile.exclude group: 'androidx.swiperefreshlayout', module: 'swiperefreshlayout'
+  compile.exclude group: 'androidx.localbroadcastmanager', module: 'localbroadcastmanager'
+  compile.exclude group: 'androidx.print', module: 'print'
+  compile.exclude group: 'androidx.documentfile', module: 'documentfile'
+  compile.exclude group: 'androidx.cursoradapter', module: 'cursoradapter'
+  compile.exclude group: 'androidx.interpolator', module: 'interpolator'
+  compile.exclude group: 'androidx.customview', module: 'customview'
+  compile.exclude group: 'androidx.versionedparcelable', module: 'versionedparcelable'
+  compile.exclude group: 'androidx.asynclayoutinflater', module: 'asynclayoutinflater'
+  compile.exclude group: 'androidx.loader', module: 'loader'
+  compile.exclude group: 'androidx.transition', module: 'transition'
 }
 
 dependencies {

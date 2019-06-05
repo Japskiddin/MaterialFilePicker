@@ -1,6 +1,7 @@
 package io.github.japskiddin.materialfilepicker.sample;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,15 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import io.github.japskiddin.materialfilepicker.MaterialFilePicker;
 import io.github.japskiddin.materialfilepicker.ui.FilePickerActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
   public static final int PERMISSIONS_REQUEST_CODE = 0;
   public static final int FILE_PICKER_REQUEST_CODE = 1;
@@ -70,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         .withRequestCode(FILE_PICKER_REQUEST_CODE)
         .withHiddenFiles(true)
         .withTitle("Sample title")
-        .withFilePick(true)
+        .withFilePick(false)
+            .withAddDirs(true)
         .start();
   }
 

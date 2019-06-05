@@ -13,5 +13,14 @@
     <string name="type_pdf">PDF</string>
     <string name="type_power_point">PPT</string>
     <string name="type_word">WORD</string>
-    <string name="type_apk">APK</string>
+    <string name="type_video">视频</string>
+    <string name="menu_select">选择</string>
+    <string name="menu_add_folder">新增文件夹</string>
+    <string name="folder_name">文件夹名称</string>
+    <string name="dialog_create">创建</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_title">输入文件夹名称</string>
+    <string name="error_folder_name">请输入文件夹名称</string>
+    <string name="error_folder_exists">文件夹存在</string>
+    <string name="error_folder_created">文件夹未创建</string>
 </resources>
