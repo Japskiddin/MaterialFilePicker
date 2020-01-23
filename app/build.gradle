@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 28
+  compileSdkVersion 29
 
   defaultConfig {
     applicationId "io.github.japskiddin.materialfilepicker.sample"
     minSdkVersion 14
-    targetSdkVersion 28
+    targetSdkVersion 29
     versionCode 1
     versionName "1.0"
   }
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'androidx.core:core:1.0.2'
-  implementation 'androidx.annotation:annotation:1.0.2'
+  implementation 'androidx.core:core:1.1.0'
+  implementation 'androidx.annotation:annotation:1.1.0'
   implementation project(':materialfilepicker')
 }

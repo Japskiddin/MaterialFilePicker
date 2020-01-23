@@ -14,7 +14,7 @@ ext {
   siteUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
   gitUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
 
-  libraryVersion = '1.1.3'
+  libraryVersion = '1.1.4'
 
   developerId = 'nkita'
   developerName = 'Nikita Bezhentsev'
@@ -26,7 +26,7 @@ ext {
 }
 
 android {
-  compileSdkVersion 28
+  compileSdkVersion 29
 
   lintOptions {
     abortOnError false
@@ -34,14 +34,14 @@ android {
 
   defaultConfig {
     minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 26
-    versionName "1.1.3"
+    targetSdkVersion 29
+    versionCode 27
+    versionName "1.1.4"
     vectorDrawables.useSupportLibrary = true
   }
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
