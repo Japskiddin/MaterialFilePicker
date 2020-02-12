@@ -7,22 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.File;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import io.github.japskiddin.materialfilepicker.R;
 import io.github.japskiddin.materialfilepicker.utils.FileTypeUtils;
+import java.io.File;
+import java.util.List;
 
 public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.DirectoryViewHolder> {
   public interface OnItemClickListener {
     void onItemClick(View view, int position);
   }
 
-  public class DirectoryViewHolder extends RecyclerView.ViewHolder {
+  public static class DirectoryViewHolder extends RecyclerView.ViewHolder {
     private ImageView mFileImage;
     private TextView mFileTitle;
     private TextView mFileSubtitle;

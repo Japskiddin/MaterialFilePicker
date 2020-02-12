@@ -14,7 +14,7 @@ ext {
   siteUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
   gitUrl = 'https://github.com/Japskiddin/MaterialFilePicker'
 
-  libraryVersion = '1.1.5'
+  libraryVersion = '1.1.6'
 
   developerId = 'nkita'
   developerName = 'Nikita Bezhentsev'
@@ -26,6 +26,14 @@ ext {
 }
 
 android {
+  packagingOptions {
+    exclude "/META-INF/*.kotlin_module"
+    exclude "**/kotlin/**"
+    exclude "**/*.txt"
+    exclude "**/*.xml"
+    exclude "**/*.properties"
+  }
+
   compileSdkVersion 29
 
   lintOptions {
@@ -35,8 +43,8 @@ android {
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 29
-    versionCode 28
-    versionName "1.1.5"
+    versionCode 29
+    versionName "1.1.6"
     vectorDrawables.useSupportLibrary = true
   }
   buildTypes {
@@ -81,7 +89,8 @@ configurations {
 }
 
 dependencies {
-  implementation 'com.google.android.material:material:1.0.0'
+  implementation 'androidx.appcompat:appcompat:1.0.2'
+  implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

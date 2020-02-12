@@ -3,7 +3,6 @@ package io.github.japskiddin.materialfilepicker.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,9 +24,11 @@ public class EmptyRecyclerView extends RecyclerView {
   }
 
   void checkIfEmpty() {
-    if (mEmptyView != null) {
+    if (mEmptyView != null && getAdapter() != null) {
       mEmptyView.setVisibility(getAdapter().getItemCount() > 0 ? GONE : VISIBLE);
       this.setVisibility(getAdapter().getItemCount() > 0 ? VISIBLE : GONE);
+    } else {
+      this.setVisibility(GONE);
     }
   }
 
