@@ -140,7 +140,7 @@ public class FilePickerActivity extends Activity {
   }
 
   private void initViews() {
-    tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
+    tvToolbarTitle = findViewById(R.id.tv_filepicker_toolbar_title);
     ImageView ivToolbarAdd = findViewById(R.id.iv_toolbar_add);
     ImageView ivToolbarCheck = findViewById(R.id.iv_toolbar_check);
     mDirectoryRecyclerView = findViewById(R.id.directory_recycler_view);

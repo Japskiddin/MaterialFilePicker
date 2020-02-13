@@ -16,7 +16,7 @@
       android:textStyle="bold"
       android:gravity="center_vertical"
       android:textColor="@color/white"
-      android:id="@+id/tv_toolbar_title"
+      android:id="@+id/tv_filepicker_toolbar_title"
       android:layout_toLeftOf="@id/iv_toolbar_add"
       android:layout_toStartOf="@id/iv_toolbar_add"
       />

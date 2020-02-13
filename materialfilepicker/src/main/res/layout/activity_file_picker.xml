@@ -7,7 +7,7 @@
     android:id="@+id/main_layout"
     >
 
-  <include layout="@layout/toolbar"/>
+  <include layout="@layout/filepicker_toolbar"/>
 
   <RelativeLayout
       android:id="@+id/btn_back"
