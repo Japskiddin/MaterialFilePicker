@@ -94,7 +94,6 @@ public class FilePickerActivity extends Activity {
     if (savedInstanceState != null) {
       mStartPath = savedInstanceState.getString(STATE_START_PATH);
       mCurrentPath = savedInstanceState.getString(STATE_CURRENT_PATH);
-      updateTitle();
     } else {
       if (getIntent().hasExtra(ARG_START_PATH)) {
         mStartPath = getIntent().getStringExtra(ARG_START_PATH);
