@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
     Toast.makeText(this, "Allow external storage reading", Toast.LENGTH_SHORT).show();
   }
 
-  @Override public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+  @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     switch (requestCode) {
       case PERMISSIONS_REQUEST_CODE: {
@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
         .withHiddenFiles(true)
         .withTitle("Sample title")
         .withFilePick(false)
-            .withAddDirs(true)
+        .withAddDirs(true)
         .start();
   }
 

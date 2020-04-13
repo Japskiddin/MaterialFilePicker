@@ -3,7 +3,6 @@ package io.github.japskiddin.materialfilepicker.ui;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -24,12 +23,15 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import io.github.japskiddin.materialfilepicker.R;
 import io.github.japskiddin.materialfilepicker.filter.CompositeFilter;
 import io.github.japskiddin.materialfilepicker.filter.PatternFilter;
+import io.github.japskiddin.materialfilepicker.storage.StorageBean;
+import io.github.japskiddin.materialfilepicker.storage.StorageUtils;
 import io.github.japskiddin.materialfilepicker.utils.FileUtils;
 import io.github.japskiddin.materialfilepicker.widget.EmptyRecyclerView;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class FilePickerActivity extends Activity {
@@ -55,8 +57,9 @@ public class FilePickerActivity extends Activity {
   private String mCurrentPath = mStartPath;
   private CharSequence mTitle;
   private TextView tvToolbarTitle;
-  private boolean mCloseable, isFilePick, addDirs;
+  private boolean mCloseable, isFilePick, addDirs, isHome = false;
   private CompositeFilter mFilter;
+  private List<File> storages = new ArrayList<>();
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -69,7 +72,7 @@ public class FilePickerActivity extends Activity {
   }
 
   @Override public void onBackPressed() {
-    backClick();
+    backClick(true);
   }
 
   @Override public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -124,6 +127,17 @@ public class FilePickerActivity extends Activity {
     if (getIntent().hasExtra(ARG_ADD_DIRS)) {
       addDirs = getIntent().getBooleanExtra(ARG_ADD_DIRS, true);
     }
+
+    List<StorageBean> storageBeans = StorageUtils.getStorageData(this);
+    storages = new ArrayList<>();
+    if (storageBeans != null) {
+      for (StorageBean storageBean : storageBeans) {
+        storages.add(new File(storageBean.getPath()));
+      }
+    } else {
+      String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+      storages.add(new File(path));
+    }
   }
 
   private void initToolbar() {
@@ -131,36 +145,21 @@ public class FilePickerActivity extends Activity {
     tvToolbarTitle.setSingleLine();
     tvToolbarTitle.setHorizontallyScrolling(true);
     tvToolbarTitle.setEllipsize(TextUtils.TruncateAt.START);
-
-    if (!TextUtils.isEmpty(mTitle)) {
-      tvToolbarTitle.setText(mTitle);
-    }
-    updateTitle();
-  }
-
-  private void initViews() {
-    tvToolbarTitle = findViewById(R.id.tv_filepicker_toolbar_title);
     ImageView ivToolbarAdd = findViewById(R.id.iv_toolbar_add);
+    ImageView ivToolbarBack = findViewById(R.id.iv_filepicker_toolbar_back);
     ImageView ivToolbarCheck = findViewById(R.id.iv_toolbar_check);
-    mDirectoryRecyclerView = findViewById(R.id.directory_recycler_view);
-    mEmptyView = findViewById(R.id.directory_empty_view);
-    RelativeLayout btn_up = findViewById(R.id.btn_back);
-    ImageView ivPlaceholder = findViewById(R.id.iv_placeholder);
-    ImageView iv_up = findViewById(R.id.iv_up);
-    Drawable drawable = VectorDrawableCompat.create(getResources(), R.drawable.ic_up, getTheme());
-    iv_up.setImageDrawable(drawable);
-    ivPlaceholder.setImageDrawable(
-        VectorDrawableCompat.create(getResources(), R.drawable.ic_file_placeholder, getTheme()));
+    ivToolbarBack.setImageDrawable(
+        VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_filepicker,
+            getTheme()));
     ivToolbarCheck.setImageDrawable(
         VectorDrawableCompat.create(getResources(), R.drawable.ic_check_circle_black_24dp,
             getTheme()));
     ivToolbarAdd.setImageDrawable(
         VectorDrawableCompat.create(getResources(), R.drawable.ic_add_box_black_24dp, getTheme()));
-    btn_up.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View view) {
-        backClick();
-      }
-    });
+
+    if (!TextUtils.isEmpty(mTitle)) {
+      tvToolbarTitle.setText(mTitle);
+    }
     if (!addDirs) {
       ivToolbarAdd.setVisibility(View.GONE);
     }
@@ -177,16 +176,58 @@ public class FilePickerActivity extends Activity {
         setResultAndFinish(mCurrentPath);
       }
     });
+    ivToolbarBack.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        setResult(RESULT_CANCELED);
+        finish();
+      }
+    });
+    updateTitle();
+  }
+
+  private void initViews() {
+    tvToolbarTitle = findViewById(R.id.tv_filepicker_toolbar_title);
+    mDirectoryRecyclerView = findViewById(R.id.directory_recycler_view);
+    mEmptyView = findViewById(R.id.directory_empty_view);
+    RelativeLayout btnHome = findViewById(R.id.btn_home);
+    ImageView ivHome = findViewById(R.id.iv_home);
+    RelativeLayout btnUp = findViewById(R.id.btn_back);
+    ImageView ivPlaceholder = findViewById(R.id.iv_placeholder);
+    ImageView ivUp = findViewById(R.id.iv_up);
+    ivUp.setImageDrawable(
+        VectorDrawableCompat.create(getResources(), R.drawable.ic_up, getTheme()));
+    ivHome.setImageDrawable(
+        VectorDrawableCompat.create(getResources(), R.drawable.ic_home_black, getTheme()));
+    ivPlaceholder.setImageDrawable(
+        VectorDrawableCompat.create(getResources(), R.drawable.ic_file_placeholder, getTheme()));
+
+    btnUp.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        backClick(false);
+      }
+    });
+    btnHome.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        isHome = true;
+        updateTitle();
+        initFilesList();
+      }
+    });
   }
 
   private void updateTitle() {
-    String titlePath = mCurrentPath.isEmpty() ? "/" : mCurrentPath;
-    tvToolbarTitle.setText(titlePath);
+    if (isHome) {
+      tvToolbarTitle.setText(R.string.file_picker_app_name);
+    } else {
+      String titlePath = mCurrentPath.isEmpty() ? "/" : mCurrentPath;
+      tvToolbarTitle.setText(titlePath);
+    }
   }
 
   private void initFilesList() {
     mDirectoryAdapter =
-        new DirectoryAdapter(this, FileUtils.getFileListByDirPath(mCurrentPath, mFilter));
+        new DirectoryAdapter(this,
+            isHome ? storages : FileUtils.getFileListByDirPath(mCurrentPath, mFilter), isHome);
 
     mDirectoryAdapter.setOnItemClickListener(new DirectoryAdapter.OnItemClickListener() {
       @Override public void onItemClick(View view, int position) {
@@ -207,14 +248,22 @@ public class FilePickerActivity extends Activity {
     }, HANDLE_CLICK_DELAY);
   }
 
-  private void backClick() {
-    if (!mCurrentPath.equals(mStartPath)) {
-      mCurrentPath = FileUtils.cutLastSegmentOfPath(mCurrentPath);
-      updateTitle();
-      initFilesList();
+  private void backClick(boolean isBackPressed) {
+    if (!isHome) {
+      if (!mCurrentPath.equals(mStartPath)) {
+        mCurrentPath = FileUtils.cutLastSegmentOfPath(mCurrentPath);
+        updateTitle();
+        initFilesList();
+      } else {
+        isHome = true;
+        updateTitle();
+        initFilesList();
+      }
     } else {
-      setResult(RESULT_CANCELED);
-      finish();
+      if (isBackPressed) {
+        setResult(RESULT_CANCELED);
+        finish();
+      }
     }
   }
 
@@ -263,6 +312,11 @@ public class FilePickerActivity extends Activity {
 
   private void handleFileClicked(final File clickedFile) {
     if (clickedFile.isDirectory()) {
+      if (isHome) {
+        mStartPath = clickedFile.getPath();
+        isHome = false;
+      }
+
       mCurrentPath = clickedFile.getPath();
       // If the user wanna go to the emulated directory, he will be taken to the
       // corresponding user emulated folder.

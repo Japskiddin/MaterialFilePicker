@@ -43,10 +43,12 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
   private List<File> mFiles;
   private Context mContext;
   private OnItemClickListener mOnItemClickListener;
+  private boolean isHome;
 
-  public DirectoryAdapter(Context context, List<File> files) {
+  public DirectoryAdapter(Context context, List<File> files, boolean isHome) {
     mContext = context;
     mFiles = files;
+    this.isHome = isHome;
   }
 
   public void setOnItemClickListener(OnItemClickListener listener) {
@@ -64,7 +66,8 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
     File currentFile = mFiles.get(position);
 
     FileTypeUtils.FileType fileType = FileTypeUtils.getFileType(currentFile);
-    Drawable drawable = VectorDrawableCompat.create(mContext.getResources(), fileType.getIcon(),
+    Drawable drawable = VectorDrawableCompat.create(mContext.getResources(),
+        isHome ? R.drawable.ic_sd_storage_black : fileType.getIcon(),
         mContext.getTheme());
     holder.mFileImage.setImageDrawable(drawable);
     holder.mFileSubtitle.setText(fileType.getDescription());

@@ -2,25 +2,19 @@ package io.github.japskiddin.materialfilepicker;
 
 import android.app.Activity;
 import android.content.Intent;
-
-import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-
-import androidx.fragment.app.Fragment;
 import io.github.japskiddin.materialfilepicker.filter.CompositeFilter;
 import io.github.japskiddin.materialfilepicker.filter.HiddenFilter;
 import io.github.japskiddin.materialfilepicker.filter.PatternFilter;
 import io.github.japskiddin.materialfilepicker.ui.FilePickerActivity;
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Material File Picker builder
  */
 public class MaterialFilePicker {
   private Activity mActivity;
-  private Fragment mFragment;
-  private Fragment mSupportFragment;
-
   private Class<? extends FilePickerActivity> mFilePickerClass = FilePickerActivity.class;
 
   private Integer mRequestCode;
@@ -41,37 +35,7 @@ public class MaterialFilePicker {
    * start file picker
    */
   public MaterialFilePicker withActivity(Activity activity) {
-    if (mSupportFragment != null || mFragment != null) {
-      throw new RuntimeException("You must pass either Activity, Fragment or SupportFragment");
-    }
-
     mActivity = activity;
-    return this;
-  }
-
-  /**
-   * Specifies fragment, which will be used to
-   * start file picker
-   */
-  public MaterialFilePicker withFragment(Fragment fragment) {
-    if (mSupportFragment != null || mActivity != null) {
-      throw new RuntimeException("You must pass either Activity, Fragment or SupportFragment");
-    }
-
-    mFragment = fragment;
-    return this;
-  }
-
-  /**
-   * Specifies support fragment which will be used to
-   * start file picker
-   */
-  public MaterialFilePicker withSupportFragment(Fragment fragment) {
-    if (mActivity != null || mFragment != null) {
-      throw new RuntimeException("You must pass either Activity, Fragment or SupportFragment");
-    }
-
-    mSupportFragment = fragment;
     return this;
   }
 
@@ -188,10 +152,6 @@ public class MaterialFilePicker {
     Activity activity = null;
     if (mActivity != null) {
       activity = mActivity;
-    } else if (mFragment != null) {
-      activity = mFragment.getActivity();
-    } else if (mSupportFragment != null) {
-      activity = mSupportFragment.getActivity();
     }
 
     Intent intent = new Intent(activity, mFilePickerClass);
@@ -221,11 +181,9 @@ public class MaterialFilePicker {
    * You should set Activity or Fragment before calling this method
    *
    * @see MaterialFilePicker#withActivity(Activity)
-   * @see MaterialFilePicker#withFragment(Fragment)
-   * @see MaterialFilePicker#withSupportFragment(Fragment)
    */
   public void start() {
-    if (mActivity == null && mFragment == null && mSupportFragment == null) {
+    if (mActivity == null) {
       throw new RuntimeException(
           "You must pass Activity/Fragment by calling withActivity/withFragment/withSupportFragment method");
     }
@@ -238,10 +196,6 @@ public class MaterialFilePicker {
 
     if (mActivity != null) {
       mActivity.startActivityForResult(intent, mRequestCode);
-    } else if (mFragment != null) {
-      mFragment.startActivityForResult(intent, mRequestCode);
-    } else {
-      mSupportFragment.startActivityForResult(intent, mRequestCode);
     }
   }
 }
