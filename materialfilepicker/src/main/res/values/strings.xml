@@ -22,7 +22,9 @@
   <string name="dialog_cancel">Cancel</string>
   <string name="dialog_title">Enter the folder name</string>
   <string name="error_folder_name">Please enter folder name</string>
-    <string name="error_folder_exists">Folder exists</string>
+  <string name="error_folder_exists">Folder exists</string>
   <string name="error_folder_created">Folder was not created</string>
   <string name="type_apk" translatable="false">APK</string>
+  <string name="internal_storage" translatable="false">Internal storage</string>
+  <string name="micro_sd" translatable="false">MicroSD</string>
 </resources>

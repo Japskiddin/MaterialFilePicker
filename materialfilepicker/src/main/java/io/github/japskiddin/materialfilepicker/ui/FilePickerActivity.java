@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import io.github.japskiddin.materialfilepicker.FileItem;
 import io.github.japskiddin.materialfilepicker.R;
 import io.github.japskiddin.materialfilepicker.filter.CompositeFilter;
 import io.github.japskiddin.materialfilepicker.filter.PatternFilter;
@@ -31,6 +32,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -59,7 +62,7 @@ public class FilePickerActivity extends Activity {
   private TextView tvToolbarTitle;
   private boolean mCloseable, isFilePick, addDirs, isHome = false;
   private CompositeFilter mFilter;
-  private List<File> storages = new ArrayList<>();
+  private List<FileItem> storages = new ArrayList<>();
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -128,16 +131,7 @@ public class FilePickerActivity extends Activity {
       addDirs = getIntent().getBooleanExtra(ARG_ADD_DIRS, true);
     }
 
-    List<StorageBean> storageBeans = StorageUtils.getStorageData(this);
-    storages = new ArrayList<>();
-    if (storageBeans != null) {
-      for (StorageBean storageBean : storageBeans) {
-        storages.add(new File(storageBean.getPath()));
-      }
-    } else {
-      String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-      storages.add(new File(path));
-    }
+    prepareStoragesList();
   }
 
   private void initToolbar() {
@@ -339,5 +333,42 @@ public class FilePickerActivity extends Activity {
     data.putExtra(RESULT_FILE_PATH, filePath);
     setResult(RESULT_OK, data);
     finish();
+  }
+
+  private void prepareStoragesList() {
+    List<StorageBean> storageBeans = StorageUtils.getStorageData(this);
+    storages = new ArrayList<>();
+    int removableCount = 0;
+    if (storageBeans != null) {
+      for (StorageBean storageBean : storageBeans) {
+        if (storageBean.getRemovable()) {
+          removableCount++;
+        }
+      }
+
+      int removablePosName = 1;
+
+      for (StorageBean storageBean : storageBeans) {
+        if (!storageBean.getRemovable()) {
+          storages.add(new FileItem(getString(R.string.internal_storage), storageBean.getPath()));
+        } else {
+          String name = removableCount > 1 ? (getString(R.string.micro_sd) + " " + removablePosName)
+              : getString(R.string.micro_sd);
+          storages.add(new FileItem(name, storageBean.getPath()));
+          if (removableCount > 1) removablePosName++;
+        }
+      }
+    } else {
+      String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+      storages.add(new FileItem(getString(R.string.internal_storage), path));
+    }
+
+    if (storages.size() > 1) {
+      Collections.sort(storages, new Comparator<FileItem>() {
+        @Override public int compare(FileItem fileItem, FileItem t1) {
+          return fileItem.getFileName().compareTo(t1.getFileName());
+        }
+      });
+    }
   }
 }

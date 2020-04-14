@@ -2,6 +2,7 @@ package io.github.japskiddin.materialfilepicker.ui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import io.github.japskiddin.materialfilepicker.FileItem;
 import io.github.japskiddin.materialfilepicker.R;
 import io.github.japskiddin.materialfilepicker.utils.FileTypeUtils;
 import java.io.File;
@@ -40,12 +42,12 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
     }
   }
 
-  private List<File> mFiles;
+  private List<FileItem> mFiles;
   private Context mContext;
   private OnItemClickListener mOnItemClickListener;
   private boolean isHome;
 
-  public DirectoryAdapter(Context context, List<File> files, boolean isHome) {
+  public DirectoryAdapter(Context context, List<FileItem> files, boolean isHome) {
     mContext = context;
     mFiles = files;
     this.isHome = isHome;
@@ -63,15 +65,27 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
   }
 
   @Override public void onBindViewHolder(@NonNull DirectoryViewHolder holder, int position) {
-    File currentFile = mFiles.get(position);
+    FileItem currentFile = mFiles.get(position);
 
-    FileTypeUtils.FileType fileType = FileTypeUtils.getFileType(currentFile);
+    FileTypeUtils.FileType fileType =
+        FileTypeUtils.getFileType(new File(currentFile.getFilePath()));
+    int drawableId;
+    if (isHome) {
+      if (currentFile.getFilePath()
+          .equals(Environment.getExternalStorageDirectory().getAbsolutePath())) {
+        drawableId = R.drawable.ic_hard_disk;
+      } else {
+        drawableId = R.drawable.ic_sd_storage_black;
+      }
+    } else {
+      drawableId = fileType.getIcon();
+    }
     Drawable drawable = VectorDrawableCompat.create(mContext.getResources(),
-        isHome ? R.drawable.ic_sd_storage_black : fileType.getIcon(),
+        drawableId,
         mContext.getTheme());
     holder.mFileImage.setImageDrawable(drawable);
     holder.mFileSubtitle.setText(fileType.getDescription());
-    holder.mFileTitle.setText(currentFile.getName());
+    holder.mFileTitle.setText(currentFile.getFileName());
   }
 
   @Override public int getItemCount() {
@@ -79,6 +93,6 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
   }
 
   public File getModel(int index) {
-    return mFiles.get(index);
+    return new File(mFiles.get(index).getFilePath());
   }
 }

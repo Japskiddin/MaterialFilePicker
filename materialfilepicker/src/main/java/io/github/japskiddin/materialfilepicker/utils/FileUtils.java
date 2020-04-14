@@ -1,5 +1,6 @@
 package io.github.japskiddin.materialfilepicker.utils;
 
+import io.github.japskiddin.materialfilepicker.FileItem;
 import java.io.File;
 import java.io.FileFilter;
 import java.text.DecimalFormat;
@@ -9,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class FileUtils {
-  public static List<File> getFileListByDirPath(String path, FileFilter filter) {
+  public static List<FileItem> getFileListByDirPath(String path, FileFilter filter) {
     File directory = new File(path);
     File[] files = directory.listFiles(filter);
 
@@ -17,8 +18,12 @@ public class FileUtils {
       return new ArrayList<>();
     }
 
-    List<File> result = Arrays.asList(files);
-    Collections.sort(result, new FileComparator());
+    List<File> list = Arrays.asList(files);
+    Collections.sort(list, new FileComparator());
+    List<FileItem> result = new ArrayList<>();
+    for (File f : list) {
+      result.add(new FileItem(f.getName(), f.getAbsolutePath()));
+    }
     return result;
   }
 
